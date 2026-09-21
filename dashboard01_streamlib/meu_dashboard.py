@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import streamlit as st
 
@@ -6,7 +7,10 @@ st.title('Dashboard de Vendas')
 
 @st.cache_data
 def carregar_dados():
-    df = pd.read_csv('vendas.csv', sep=';')
+    diretorio_atual = os.path.dirname(__file__)
+    caminho_csv = os.path.join(diretorio_atual, 'vendas.csv')
+
+    df = pd.read_csv(caminho_csv, sep=';')
     df['mes'] = df['data_hora'].str[:7]
     return df
 
